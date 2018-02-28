@@ -7,7 +7,7 @@ const scriptPath = path.join(__dirname, 'swift/HideIcons');
 var hideProcess;
 
 exports.hide = () => {
-  wallpaper.get().then(imagePath => {
+  return wallpaper.get().then(imagePath => {
     hideProcess = execa(scriptPath, [imagePath]);
   });
 }
