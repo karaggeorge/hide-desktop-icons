@@ -1,0 +1,33 @@
+{
+  "name": "hide-icons",
+  "version": "0.1.0",
+  "description": "Hide the desktop icons for macOS",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "build": "swiftc swift/HideIcons.swift -o swift/HideIcons"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karaggeorge/hide-icons.git"
+  },
+  "keywords": [
+    "hide",
+    "desktop",
+    "icons",
+    "macOS",
+    "wallpaper"
+  ],
+  "author": "George Karagkiaouris",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/karaggeorge/hide-icons/issues"
+  },
+  "homepage": "https://github.com/karaggeorge/hide-icons#readme",
+  "dependencies": {
+    "execa": "^0.9.0",
+    "wallpaper": "^2.6.0"
+  }
+}
