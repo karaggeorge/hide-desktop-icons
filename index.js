@@ -9,6 +9,10 @@ var hideProcess;
 exports.hide = () => {
   return wallpaper.get().then(imagePath => {
     hideProcess = execa(scriptPath, [imagePath]);
+
+    return new Promise(done => {
+      setTimeout(done, 1000);
+    });
   });
 }
 
