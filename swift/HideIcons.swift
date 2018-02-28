@@ -1,42 +1,42 @@
 import Cocoa
-import Quartz
 
-if CommandLine.argc < 2 {
-    print("Please pass a filename")
-    exit(1)
+let arguments = CommandLine.arguments.dropFirst()
+
+if arguments.isEmpty {
+  print("Please pass a filename")
+  exit(1)
 }
 
-let imagePath = CommandLine.arguments[1]
-
-let screenSize: CGRect = CGDisplayBounds(CGMainDisplayID())
-
+let imagePath = arguments.first!
+let screenSize = CGDisplayBounds(CGMainDisplayID())
 let screenWidth = screenSize.width
 let screenHeight = screenSize.height
 
-func createWindow () {
-  let window = NSWindow(contentRect: NSMakeRect(0, 0, screenWidth, screenHeight+1600),
-                        styleMask: .titled,
-                        backing: .buffered,
-                        defer: true)
+func createWindow() {
+  let window = NSWindow(
+    contentRect: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight + 1600),
+    styleMask: .titled,
+    backing: .buffered,
+    defer: true
+  )
 
-  window.level = NSWindow.Level(Int(CGWindowLevelForKey(CGWindowLevelKey.desktopIconWindow)))
+  window.level = NSWindow.Level(Int(CGWindowLevelForKey(.desktopIconWindow)))
   window.collectionBehavior = .stationary
   window.orderFrontRegardless()
   window.styleMask = .borderless
-  window.setFrame(NSMakeRect(0, 0, screenWidth, screenHeight), display: true)
+  window.setFrame(CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight), display: true)
 
-  let imageView = NSImageView(frame: window.contentView!.frame)
+  let view = window.contentView!
+  let imageView = NSImageView(frame: view.frame)
   imageView.imageScaling = .scaleAxesIndependently
   imageView.image = NSImage(contentsOfFile: imagePath)
-  window.contentView!.addSubview(imageView)
+  view.addSubview(imageView)
 
   NSApp.run()
 }
 
-func notificationRecieved (n: Notification) {
+NSWorkspace.shared.notificationCenter.addObserver(forName: NSWorkspace.activeSpaceDidChangeNotification, object: nil, queue: nil) { _ in
   createWindow()
 }
-
-NSWorkspace.shared.notificationCenter.addObserver(forName: NSWorkspace.activeSpaceDidChangeNotification, object: nil, queue: nil, using: notificationRecieved)
 
 createWindow()
