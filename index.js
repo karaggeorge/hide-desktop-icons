@@ -1,12 +1,15 @@
 const wallpaper = require('wallpaper');
 const execa = require('execa');
+const path = require('path');
 
-var script;
+const scriptPath = path.join(__dirname, 'swift/HideIcons');
+
+var hideProcess;
 
 exports.hide = () => {
   wallpaper.get().then(imagePath => {
-    script = execa('swift/HideIcons', [imagePath]);
+    hideProcess = execa(scriptPath, [imagePath]);
   });
 }
 
-exports.show = () => script.kill();
+exports.show = () => hideProcess.kill();
