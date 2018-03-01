@@ -32,13 +32,20 @@ const desktopIcons = require('hide-desktop-icons')
 
 ## Usage
 
-### `hide(void): Promise`
+### `hide(filePath, [options]): Promise`
 
-Returns a Promise that will resolve when the windows are hidden.
+Returns a Promise that will resolve when the windows are hidden with the pid of the `child_process`.
+
+
+**filePath** (type: `String`) is the path to the file which is to be used as the new wallpaper. If this is undefined, the defauly user wallpaper will be used
+
+**options** (type: `Object`) 
+- **detached** (type: `bool`, default: `false`) detach the child process. This allows the parent process to exit without showing the icons. Make sure you cleanup at some point by killing the process, using [forceShow](https://github.com/karaggeorge/hide-desktop-icons#forceshowvoid-void)
+
 
 ```js
-desktopIcons.hide().then(() => {
-  console.log('Icons are now hidden');
+desktopIcons.hide().then(pid => {
+  console.log(`Icons are now hidden (pid: ${pid})`);
 });
 ```
 
@@ -48,6 +55,14 @@ Shows the windows again. This should be called before exiting to make sure the w
 
 ```js
 desktopIcons.show();
+```
+
+### `forceShow(void): void`
+
+Shows the windows again by killing the process. Works even if the icons were hidden by a different script.
+
+```js
+desktopIcons.forceShow();
 ```
 
 ## Contributing
