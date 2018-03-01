@@ -1,7 +1,7 @@
 Hide Desktop Icons (MacOS only for now)
 ==
 
-Temporarily hide the desktop icons by placing a window that takes up the entire screen and contains the wallpaper image right aboev the icons. The window won't show up in the Mission Control and it won't be moveable.
+Temporarily hide the desktop icons by placing a window that takes up the entire screen and contains the wallpaper image right above the icons. The window won't show up in the Mission Control and it won't be moveable.
 
 **Important:** This package does not work on Windows or Linux
 
