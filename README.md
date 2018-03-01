@@ -1,25 +1,25 @@
 Hide Desktop Icons (MacOS only for now)
 ==
 
-Temporarily hide the desktop icons by placing a window that takes up the entire screen and contains the wallpaper image right aboev the icons. The window won't show up in the Mission Control and it won't be moveable.
+Temporarily hide the desktop icons by placing a window that takes up the entire screen and contains the wallpaper image right above the icons. The window won't show up in the Mission Control and it won't be moveable.
 
 **Important:** This package does not work on Windows or Linux
 
 **Important:** This will only hide the icons for the currently main display and workspace
 
-## Instalation
+## Installation
 
-To install hide-desktop-icons in your project add it using NPM
+Install with NPM
 ```javascript
 npm install hide-desktop-icons
 ```
 
-or yarn
+or Yarn
 ```javascript
 yarn add hide-desktop-icons
 ```
 
-After that you can import the various functions as follows:
+Import various functions as follows:
 ```js
 import desktopIcons from 'hide-desktop-icons';
 ```
