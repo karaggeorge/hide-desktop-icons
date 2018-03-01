@@ -6,17 +6,21 @@ const scriptPath = path.join(__dirname, 'scripts/HideIcons');
 
 var hideProcess;
 
-exports.hide = () => {
-  return wallpaper.get().then(imagePath => {
-    hideProcess = execa(scriptPath, [imagePath]);
+const createWindow = (imagePath, done) => {
+  hideProcess = execa(scriptPath, [imagePath]);
 
-    // Ensure icons are hidden before resolving the promise
-    return new Promise(done => {
-      hideProcess.stdout.on('data', data => {
-        if(data.toString().trim() === 'READY') done();
-      });
-    });
+  // Ensure icons are hidden before resolving the promise
+  hideProcess.stdout.on('data', data => {
+    if(data.toString().trim() === 'READY') done();
   });
-}
+};
+
+exports.hide = imagePath => new Promise(done => {
+  if (!imagePath) {
+    wallpaper.get().then(wallpaper => createWindow(wallpaper, done));
+  } else {
+    createWindow(imagePath, done);
+  }
+});
 
 exports.show = () => hideProcess.kill();
