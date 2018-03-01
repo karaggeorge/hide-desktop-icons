@@ -1,5 +1,8 @@
 import Cocoa
 
+// Don't buffer stdout
+setbuf(__stdoutp, nil)
+
 let arguments = CommandLine.arguments.dropFirst()
 
 if arguments.isEmpty {
@@ -11,6 +14,12 @@ let imagePath = arguments.first!
 let screenSize = CGDisplayBounds(CGMainDisplayID())
 let screenWidth = screenSize.width
 let screenHeight = screenSize.height
+
+class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
+  func applicationDidFinishLaunching(_ notification: Notification) {
+    print("READY")
+  }
+}
 
 func createWindow() {
   let window = NSWindow(
@@ -37,6 +46,7 @@ func createWindow() {
 
   view.addSubview(imageView)
 
+  NSApp.delegate = AppDelegate()
   NSApp.run()
 }
 

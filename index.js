@@ -12,7 +12,9 @@ exports.hide = () => {
 
     // Ensure icons are hidden before resolving the promise
     return new Promise(done => {
-      setTimeout(done, 1000);
+      hideProcess.stdout.on('data', data => {
+        if(data.toString().trim() === 'READY') done();
+      });
     });
   });
 }
