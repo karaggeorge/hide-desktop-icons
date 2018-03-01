@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "build": "swiftc swift/HideIcons.swift -o swift/HideIcons"
+    "build": "swift build -c release -Xswiftc -static-stdlib --package-path swift && cp swift/.build/release/HideIcons scripts/HideIcons"
   },
   "repository": {
     "type": "git",
