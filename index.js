@@ -1,26 +1,31 @@
 const wallpaper = require('wallpaper');
 const execa = require('execa');
 const path = require('path');
+const fkill = require('fkill');
 
 const scriptPath = path.join(__dirname, 'scripts/HideIcons');
 
 var hideProcess;
 
-const createWindow = (imagePath, done) => {
-  hideProcess = execa(scriptPath, [imagePath]);
+const createWindow = (imagePath, done, { detached }) => {
+  hideProcess = execa(scriptPath, [imagePath], { detached });
 
   // Ensure icons are hidden before resolving the promise
   hideProcess.stdout.on('data', data => {
-    if(data.toString().trim() === 'READY') done();
+    if(data.toString().trim() === 'READY') {
+      done(hideProcess.pid);
+    }
   });
 };
 
-exports.hide = imagePath => new Promise(done => {
+exports.hide = (imagePath, opts = {}) => new Promise(done => {
   if (!imagePath) {
-    wallpaper.get().then(wallpaper => createWindow(wallpaper, done));
+    wallpaper.get().then(wallpaper => createWindow(wallpaper, done, opts));
   } else {
-    createWindow(imagePath, done);
+    createWindow(imagePath, done, opts);
   }
 });
 
 exports.show = () => hideProcess.kill();
+
+exports.forceShow = () => fkill('HideIcons');
