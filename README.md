@@ -74,6 +74,7 @@ This package was created for [Kap](https://github.com/wulkano/kap)
 ## Related
 
 [hide-desktop-icons-cli](https://github.com/karaggeorge/hide-desktop-icons-cli) - CLI that uses this API
+
 [wallpaper](https://github.com/sindresorhus/wallpaper) - Get/Set the user's wallpaper
 
 ## License
