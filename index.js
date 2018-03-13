@@ -12,11 +12,13 @@ const createWindow = (imagePath, done, { detached }) => {
   hideProcess = execa(scriptPath, [imagePath], { detached });
 
   // Ensure icons are hidden before resolving the promise
-  hideProcess.stdout.on('data', data => {
-    if(data.toString().trim() === 'READY') {
-      done(hideProcess.pid);
-    }
-  });
+  if(hideProcess.stdout) {
+    hideProcess.stdout.on('data', data => {
+      if(data.toString().trim() === 'READY') {
+        done(hideProcess.pid);
+      }
+    });
+  }
 };
 
 exports.hide = (imagePath, opts = {}) => new Promise(done => {
