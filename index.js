@@ -2,8 +2,9 @@ const wallpaper = require('wallpaper');
 const execa = require('execa');
 const path = require('path');
 const fkill = require('fkill');
+const electronUtil = require('electron-util/node');
 
-const scriptPath = path.join(__dirname, 'scripts/HideIcons');
+const scriptPath = path.join(electronUtil.fixPathForAsarUnpack(__dirname), 'scripts/HideIcons');
 
 var hideProcess;
 
