@@ -1,6 +1,6 @@
 {
   "name": "hide-desktop-icons",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "Hide the desktop icons for macOS",
   "main": "index.js",
   "directories": {
